@@ -86,6 +86,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<Loaiks> arr_diadiem;
     TextView textView_diadiem;
     public static long[] date;
+    public static int idtaikhoan = 0;
+
+    int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION;
 
 
     @Override
@@ -93,7 +96,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         AnhXa();
+        Permission();
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
+            getIdTaiKhoan();
             ActionBar();
             ActionViewFlipper();
             GetDuLieuDiaDiem();
@@ -106,14 +111,64 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void Permission() {
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)) {
+                // Show an explanation to the username_icon *asynchronously* -- don't block
+                // this thread waiting for the username_icon's response! After the username_icon
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed; request the permission
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+
+                // MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION is an
+                // app-defined int constant. The callback method gets the
+                // result of the request.
+            }
+        } else {
+            // Permission has already been granted
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
+    }
+
     private void CatchOnItemListView() {
         listViewmanhinhchinh.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+            public void onItemClick(AdapterView<?> parent, View view, int i, long id) {
+                switch (i){
                     case 0:
                         if (CheckConnection.haveNetworkConnection(getApplicationContext())){
                             Intent intent = new Intent(MainActivity.this,MainActivity.class);
+                            intent.putExtra("idtaikhoan", idtaikhoan);
                             startActivity(intent);
                         }else {
                             CheckConnection.ShowToast_Short(getApplicationContext(),"Kiểm tra lại kết nôi");
@@ -174,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
                     case 2:
                         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
                             Intent intent = new Intent(MainActivity.this, TaiKhoanActivity.class);
-                            //intent.putExtra("idtaikhoan", idtaikhoan);
+                            intent.putExtra("idtaikhoan", idtaikhoan);
                             startActivity(intent);
                         } else {
                             CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
@@ -376,6 +431,10 @@ public class MainActivity extends AppCompatActivity {
         date = new long[60];
         Arrays.fill(date, 0);
 
+    }
+
+    private void getIdTaiKhoan() {
+        idtaikhoan = getIntent().getIntExtra("idtaikhoan", -1);
     }
 }
 
