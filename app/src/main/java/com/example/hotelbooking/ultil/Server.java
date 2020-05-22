@@ -10,6 +10,5 @@ public class Server {
     public static String duongdan_inserttaikhoan = "http://" + localhost + "/server/insertTaiKhoan.php";
     public static String duongdan_updatematkhau = "http://" + localhost + "/server/updateMatKhau.php";
     public static String duongdan_updatethongtin = "http://" + localhost + "/server/updateThongTinTK.php";
-
     public static String duongdan_loaiphong = "http://" + localhost + "/server/getloaiphong.php";
 }

@@ -3,8 +3,11 @@ package com.example.hotelbooking.ultil;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.ConnectivityManager;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkInfo;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 public class CheckConnection {
     public static boolean haveNetworkConnection(Context context) {
@@ -12,19 +15,21 @@ public class CheckConnection {
         boolean haveConnectedMobile = false;
 
         ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
-        for (NetworkInfo ni : netInfo) {
-            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
-                if (ni.isConnected())
+        Network[] networks = cm.getAllNetworks();
+        for (Network ni : networks) {
+            NetworkInfo networkInfo = cm.getNetworkInfo(ni);
+            if (networkInfo.getTypeName().equalsIgnoreCase("WIFI"))
+                if (networkInfo.isConnected())
                     haveConnectedWifi = true;
-            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
-                if (ni.isConnected())
+            if (networkInfo.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (networkInfo.isConnected())
                     haveConnectedMobile = true;
         }
         return haveConnectedWifi || haveConnectedMobile;
     }
-    public static  void ShowToast_Short(Context context, String thongbao)
+
+    public static  void ShowToast_Short(Context context, String m)
     {
-        Toast.makeText(context,thongbao, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context,m, Toast.LENGTH_SHORT).show();
     }
 }
