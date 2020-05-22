@@ -72,7 +72,7 @@ import javax.crypto.KeyAgreement;
         Anhxa();
         ActionToolbar();
         GetInformation();
-        //EventButton();
+        EventButton();
         //EventAddress();
     }
 
@@ -188,15 +188,15 @@ import javax.crypto.KeyAgreement;
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.menucart:
-//                Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
-//                startActivity(intent);
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menucart:
+                Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 //
 //    public LatLng getLocationFromAddress(Context context, String strAddress) {
 //

@@ -50,6 +50,7 @@ import com.example.hotelbooking.adapter.LoaiksAdapter;
 import com.example.hotelbooking.model.KhachSan;
 import com.example.hotelbooking.model.Loaiks;
 import com.example.hotelbooking.ultil.CheckConnection;
+import com.example.hotelbooking.ultil.Giohang;
 import com.example.hotelbooking.ultil.Server;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
@@ -87,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
     TextView textView_diadiem;
     public static long[] date;
 
+    public static ArrayList<Giohang> arr_giohang;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,17 +109,55 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+
+//    @Override
+//    public boolean onQueryTextSubmit(String query) {
+//        return false;
+//    }
+
+    //    @Override
+//    public boolean onQueryTextChange(String newText) {
+//        String userInput = newText.toLowerCase();
+//        ArrayList<KhachSan> newList = new ArrayList<>();
+//        for (KhachSan item : mangkhachsan) {
+//            if (item.getTenks().toLowerCase().contains(userInput)) {
+//                newList.add(item);
+//            }
+//        }
+//        khachSanAdapter.updateArrayList(newList);
+//        return true;
+//   }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_cart, menu);
+        MenuItem searchItem = menu.findItem(R.id.menusearch);
+//        SearchView searchView = (SearchView) searchItem.getActionView();
+//        searchView.setOnQueryTextListener((SearchView.OnQueryTextListener) this);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menucart:
+                Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void CatchOnItemListView() {
         listViewmanhinhchinh.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position){
+                switch (position) {
                     case 0:
-                        if (CheckConnection.haveNetworkConnection(getApplicationContext())){
-                            Intent intent = new Intent(MainActivity.this,MainActivity.class);
+                        if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
+                            Intent intent = new Intent(MainActivity.this, MainActivity.class);
                             startActivity(intent);
-                        }else {
-                            CheckConnection.ShowToast_Short(getApplicationContext(),"Kiểm tra lại kết nôi");
+                        } else {
+                            CheckConnection.ShowToast_Short(getApplicationContext(), "Kiểm tra lại kết nôi");
                         }
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
@@ -129,8 +170,7 @@ public class MainActivity extends AppCompatActivity {
                             builderSingle.setAdapter(diadiemadapter, new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
-                                    switch (which)
-                                    {
+                                    switch (which) {
                                         case 0:
                                             if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
                                                 Intent intent = new Intent(MainActivity.this, HoChiMinhActivity.class);
@@ -362,19 +402,25 @@ public class MainActivity extends AppCompatActivity {
         listViewmanhinhchinh.setAdapter((loaiksAdapter));
 
         mangkhachsan = new ArrayList<>();
-        khachSanAdapter = new KhachSanAdapter(getApplicationContext(),mangkhachsan);
+        khachSanAdapter = new KhachSanAdapter(getApplicationContext(), mangkhachsan);
         recyclerViewmanhinhchinh.setHasFixedSize(true);
-        recyclerViewmanhinhchinh.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
+        recyclerViewmanhinhchinh.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
         recyclerViewmanhinhchinh.setAdapter(khachSanAdapter);
 
         //mangkhachsandadat = new ArrayList<>();
         //khachsandadatAdapter = new khachsandadatAdapter(getApplicationContext(), mangkhachsandadat);
 
         arr_diadiem = new ArrayList<>();
-        diadiemadapter = new LoaiksAdapter(arr_diadiem,getApplicationContext());
+        diadiemadapter = new LoaiksAdapter(arr_diadiem, getApplicationContext());
         textView_diadiem = (TextView) findViewById(R.id.textview_diadiem);
         date = new long[60];
         Arrays.fill(date, 0);
+
+        if (arr_giohang != null) {
+
+        } else {
+            arr_giohang = new ArrayList<>();
+        }
 
     }
 }

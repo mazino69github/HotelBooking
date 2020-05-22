@@ -16,10 +16,13 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.example.hotelbooking.R;
+import com.example.hotelbooking.activity.CalendarActivity;
+import com.example.hotelbooking.activity.GioHangActivity;
 import com.example.hotelbooking.activity.MainActivity;
 import com.example.hotelbooking.model.KhachSan;
 import com.example.hotelbooking.model.LoaiPhong;
 import com.example.hotelbooking.model.Loaiks;
+import com.example.hotelbooking.ultil.Giohang;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
@@ -123,57 +126,57 @@ public class loaiphongAdapter extends BaseAdapter {
         int giaphong = loaiPhong.getGiaphong();
         spinnerDem(viewHolder, loaiPhong, giaphong);
         spinnerPhong(viewHolder, loaiPhong);
-        //eventbutton(viewHolder, loaiPhong, khachSan, giaphong);
+        eventbutton(viewHolder, loaiPhong, khachSan, giaphong);
         return view;
     }
 
-//    private void eventbutton(final ViewHolder viewHolder, final LoaiPhong loaiPhong, final KhachSan khachSan, final int giaphong) {
-//        viewHolder.btchonphong.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                String sodem = viewHolder.spinnerDem.getSelectedItem().toString();
-//                int SoDem = Integer.parseInt(sodem.replace(" đêm", ""));
-//                String sophong = viewHolder.spinnerPhong.getSelectedItem().toString();
-//                int SoPhong = Integer.parseInt(sophong.replace(" phòng", ""));
-//
-//                if (MainActivity.arr_giohang.size() > 0) {
-//                    boolean exit = false;
-//                    for (int i = 0; i < MainActivity.arr_giohang.size(); i++) {
-//                        if (MainActivity.arr_giohang.get(i).getIdphong() == loaiPhong.getIdphong()) {
-//                            MainActivity.arr_giohang.get(i).setSoluong(MainActivity.arr_giohang.get(i).getSoluong() + SoPhong);
-//                            MainActivity.arr_giohang.get(i).setSodem(MainActivity.arr_giohang.get(i).getSodem() + SoDem);
-//                            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
-//                            Date d_tra = formatter.parse(MainActivity.arr_giohang.get(i).getNgaytraphong(),new ParsePosition(0));
-//                            Date d_nhan = formatter.parse(MainActivity.arr_giohang.get(i).getNgaynhanphong(),new ParsePosition(0));
-//                            CalendarActivity.XoaNgay(d_nhan, d_tra);
-//                            if (MainActivity.arr_giohang.get(i).getSoluong() > 10) {
-//                                MainActivity.arr_giohang.get(i).setSoluong(10);
-//                            }
-//                            if (MainActivity.arr_giohang.get(i).getSodem() > 10) {
-//                                MainActivity.arr_giohang.get(i).setSodem(10);
-//                            }
-//                            MainActivity.arr_giohang.get(i).setGiaphong(giaphong * MainActivity.arr_giohang.get(i).getSoluong() * MainActivity.arr_giohang.get(i).getSodem());
-//                            MainActivity.arr_giohang.get(i).setNgaynhanphong(null);
-//                            MainActivity.arr_giohang.get(i).setNgaytraphong(null);
-//                            exit = true;
-//                        }
-//                    }
-//                    if (exit == false) {
-//                        int giamoi = SoPhong * giaphong * SoDem;
-//                        MainActivity.arr_giohang.add(new giohang(loaiPhong.getIdphong(), loaiPhong.getTenloaiphong(), loaiPhong.getSogiuong(),
-//                                loaiPhong.getSokhach(), loaiPhong.getHinhanh(), giamoi, loaiPhong.getIdkhachsan(), khachSan.getTenks(), SoPhong, SoDem, null, null, ""));
-//                    }
-//                } else {
-//                    int giamoi = SoPhong * giaphong * SoDem;
-//                    MainActivity.arr_giohang.add(new giohang(loaiphong.getIdphong(), loaiphong.getTenloaiphong(), loaiphong.getSogiuong(),
-//                            loaiphong.getSokhach(), loaiphong.getHinhanh(), giamoi, loaiphong.getIdkhachsan(), khachsan.getTensanpham(), SoPhong, SoDem, null, null, ""));
-//                }
-//                Intent intent = new Intent(context, GioHangActivity.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                context.startActivity(intent);
-//            }
-//        });
-//    }
+    private void eventbutton(final ViewHolder viewHolder, final LoaiPhong loaiPhong, final KhachSan khachSan, final int giaphong) {
+        viewHolder.btchonphong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String sodem = viewHolder.spinnerDem.getSelectedItem().toString();
+                int SoDem = Integer.parseInt(sodem.replace(" đêm", ""));
+                String sophong = viewHolder.spinnerPhong.getSelectedItem().toString();
+                int SoPhong = Integer.parseInt(sophong.replace(" phòng", ""));
+
+                if (MainActivity.arr_giohang.size() > 0) {
+                    boolean exit = false;
+                    for (int i = 0; i < MainActivity.arr_giohang.size(); i++) {
+                        if (MainActivity.arr_giohang.get(i).getIdphong() == loaiPhong.getIdphong()) {
+                            MainActivity.arr_giohang.get(i).setSoluong(MainActivity.arr_giohang.get(i).getSoluong() + SoPhong);
+                            MainActivity.arr_giohang.get(i).setSodem(MainActivity.arr_giohang.get(i).getSodem() + SoDem);
+                            SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                            Date d_tra = formatter.parse(MainActivity.arr_giohang.get(i).getNgaytraphong(),new ParsePosition(0));
+                            Date d_nhan = formatter.parse(MainActivity.arr_giohang.get(i).getNgaynhanphong(),new ParsePosition(0));
+                            CalendarActivity.XoaNgay(d_nhan, d_tra);
+                            if (MainActivity.arr_giohang.get(i).getSoluong() > 10) {
+                                MainActivity.arr_giohang.get(i).setSoluong(10);
+                            }
+                            if (MainActivity.arr_giohang.get(i).getSodem() > 10) {
+                                MainActivity.arr_giohang.get(i).setSodem(10);
+                            }
+                            MainActivity.arr_giohang.get(i).setGiaphong(giaphong * MainActivity.arr_giohang.get(i).getSoluong() * MainActivity.arr_giohang.get(i).getSodem());
+                            MainActivity.arr_giohang.get(i).setNgaynhanphong(null);
+                            MainActivity.arr_giohang.get(i).setNgaytraphong(null);
+                            exit = true;
+                        }
+                    }
+                    if (exit == false) {
+                        int giamoi = SoPhong * giaphong * SoDem;
+                        MainActivity.arr_giohang.add(new Giohang(loaiPhong.getIdphong(), loaiPhong.getTenloaiphong(), loaiPhong.getSogiuong(),
+                                loaiPhong.getSokhach(), loaiPhong.getHinhanh(), giamoi, loaiPhong.getIdkhachsan(), khachSan.getTenks(), SoPhong, SoDem, null, null, ""));
+                    }
+                } else {
+                    int giamoi = SoPhong * giaphong * SoDem;
+                    MainActivity.arr_giohang.add(new Giohang(loaiPhong.getIdphong(), loaiPhong.getTenloaiphong(), loaiPhong.getSogiuong(),
+                            loaiPhong.getSokhach(), loaiPhong.getHinhanh(), giamoi, loaiPhong.getIdkhachsan(), khachSan.getTenks(), SoPhong, SoDem, null, null, ""));
+                }
+                Intent intent = new Intent(context, GioHangActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
+    }
 
     public void spinnerDem(final ViewHolder viewHolder, final LoaiPhong loaiPhong, final int giaphong) {
         String[] sodem = new String[]{"1 đêm", "2 đêm", "3 đêm", "4 đêm", "5 đêm", "6 đêm", "7 đêm", "8 đêm", "9 đêm", "10 đêm"};

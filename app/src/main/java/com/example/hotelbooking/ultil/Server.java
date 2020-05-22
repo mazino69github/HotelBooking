@@ -9,4 +9,5 @@ public class Server {
 
 
     public static String duongdan_loaiphong = "http://" + localhost + "/server/getloaiphong.php";
+    public static String duongdan_taikhoan = "http://" + localhost + "/server/gettaikhoan.php";
 }

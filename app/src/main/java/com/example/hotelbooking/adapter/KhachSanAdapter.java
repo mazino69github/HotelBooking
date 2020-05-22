@@ -76,4 +76,10 @@ public class KhachSanAdapter extends RecyclerView.Adapter<KhachSanAdapter.ItemHo
             });
         }
     }
+
+    public void updateArrayList(ArrayList<KhachSan> newList) {
+        arrayKhachSan = new ArrayList<>();
+        arrayKhachSan.addAll(newList);
+        notifyDataSetChanged();
+    }
 }

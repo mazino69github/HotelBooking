@@ -157,16 +157,16 @@ public class PhongActivity extends AppCompatActivity implements SearchView.OnQue
         return true;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId())
-//        {
-//            case R.id.menucart:
-//                Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
-//                startActivity(intent);
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId())
+        {
+            case R.id.menucart:
+                Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
+                startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     private void Anhxa() {
         toolbarphong = (Toolbar) findViewById(R.id.toolbarchonphong);

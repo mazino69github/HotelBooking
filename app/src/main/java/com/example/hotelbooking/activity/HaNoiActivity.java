@@ -10,6 +10,9 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
@@ -69,33 +72,33 @@ public class HaNoiActivity extends AppCompatActivity {
         }
     }
 
-    /*@Override
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_cart, menu);
         MenuItem searchItem = menu.findItem(R.id.menusearch);
-        SearchView searchView = (SearchView) searchItem.getActionView();
-        searchView.setOnQueryTextListener(this);
+//        SearchView searchView = (SearchView) searchItem.getActionView();
+//        searchView.setOnQueryTextListener(this);
         return true;
     }
 
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        String userInput = newText.toLowerCase();
-        ArrayList<KhachSan> newList = new ArrayList<>();
-        for (KhachSan item : arr_hcm){
-            if (item.getTenks().toLowerCase().contains(userInput)){
-                newList.add(item);
-            }
-        }
-        hochiminhAdapter.updateArrayList(newList);
-        return true;
-    }
+//    @Override
+//    public boolean onQueryTextSubmit(String query) {
+//        return false;
+//    }
+//
+//    @Override
+//    public boolean onQueryTextChange(String newText) {
+//        String userInput = newText.toLowerCase();
+//        ArrayList<KhachSan> newList = new ArrayList<>();
+//        for (KhachSan item : arr_hcm){
+//            if (item.getTenks().toLowerCase().contains(userInput)){
+//                newList.add(item);
+//            }
+//        }
+//        hochiminhAdapter.updateArrayList(newList);
+//        return true;
+//    }
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
@@ -106,7 +109,7 @@ public class HaNoiActivity extends AppCompatActivity {
                 startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
-    }*/
+    }
 
     private void LoadMoreData() {
         lvHN.setOnItemClickListener(new AdapterView.OnItemClickListener() {
