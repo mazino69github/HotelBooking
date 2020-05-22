@@ -16,15 +16,6 @@
         <activity android:name=".activity.DanhGia"></activity>
         <activity android:name=".activity.PhongActivity" />
         <activity android:name=".activity.ChiTietKhachSanActivity" />
-        <activity android:name=".activity.TaiKhoanActivity" />
-        <activity
-            android:name=".activity.ThongTinActivity"
-            android:label=".activity@string/title_activity_thong_tin" />
-        <activity android:name=".activity.ThongTinKhachHangActivity" />
-        <activity android:name=".activity.DaNangActivity" />
-        <activity android:name=".activity.HaNoiActivity" />
-        <activity android:name=".activity.HoChiMinhActivity" />
-        <activity android:name=".activity.DangKyActivity" />
         <activity android:name=".activity.DangNhapActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,9 +23,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".activity.ThongTinActivity"
+            android:label="@string/title_activity_thong_tin" />
         <activity android:name=".activity.MainActivity"/>
-
-
+        <activity android:name=".activity.ThongTinKhachHangActivity" />
+        <activity android:name=".activity.DaNangActivity" />
+        <activity android:name=".activity.HaNoiActivity" />
+        <activity android:name=".activity.HoChiMinhActivity" />
+        <activity android:name=".activity.DangKyActivity" />
     </application>
 
 </manifest>

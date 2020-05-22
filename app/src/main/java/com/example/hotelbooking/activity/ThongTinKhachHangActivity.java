@@ -84,7 +84,7 @@ public class ThongTinKhachHangActivity extends AppCompatActivity {
                                     public void onResponse(String response) {
                                         if (response.equals("1"))
                                         {
-                                            //MainActivity.arr_giohang.clear();
+                                            MainActivity.arr_giohang.clear();
                                             CheckConnection.ShowToast_Short(getApplicationContext(),"Bạn đã đặt phòng khách sạn thành công");
                                             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                             intent.putExtra("idtaikhoan", MainActivity.idtaikhoan);
