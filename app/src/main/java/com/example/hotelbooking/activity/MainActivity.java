@@ -90,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
 
     public static ArrayList<Giohang> arr_giohang;
 
+    public static int idtaikhoan = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         AnhXa();
         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
+            getIdTaiKhoan();
             ActionBar();
             ActionViewFlipper();
             GetDuLieuDiaDiem();
@@ -114,8 +117,7 @@ public class MainActivity extends AppCompatActivity {
 //    public boolean onQueryTextSubmit(String query) {
 //        return false;
 //    }
-
-    //    @Override
+//    @Override
 //    public boolean onQueryTextChange(String newText) {
 //        String userInput = newText.toLowerCase();
 //        ArrayList<KhachSan> newList = new ArrayList<>();
@@ -155,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
                     case 0:
                         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
                             Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                            intent.putExtra("idtaikhoan", idtaikhoan);
                             startActivity(intent);
                         } else {
                             CheckConnection.ShowToast_Short(getApplicationContext(), "Kiểm tra lại kết nôi");
@@ -214,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
                     case 2:
                         if (CheckConnection.haveNetworkConnection(getApplicationContext())) {
                             Intent intent = new Intent(MainActivity.this, TaiKhoanActivity.class);
-                            //intent.putExtra("idtaikhoan", idtaikhoan);
+                            intent.putExtra("idtaikhoan", idtaikhoan);
                             startActivity(intent);
                         } else {
                             CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn hãy kiểm tra lại kết nối");
@@ -422,6 +425,9 @@ public class MainActivity extends AppCompatActivity {
             arr_giohang = new ArrayList<>();
         }
 
+    }
+    private void getIdTaiKhoan() {
+        idtaikhoan = getIntent().getIntExtra("idtaikhoan", -1);
     }
 }
 

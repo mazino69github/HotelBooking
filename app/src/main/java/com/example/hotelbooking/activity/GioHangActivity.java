@@ -66,7 +66,7 @@ public class GioHangActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gio_hang);
         Anhxa();
-        //GetDataTaiKhoan();
+        GetDataTaiKhoan();
         ActionToolbar();
         CheckData();
         EvenUltil();
@@ -74,41 +74,41 @@ public class GioHangActivity extends AppCompatActivity {
         EvenButton();
     }
 
-//    private void GetDataTaiKhoan() {
-//        RequestQueue requestQueue2 = Volley.newRequestQueue(getApplicationContext());
-//        JsonArrayRequest jsonArrayRequest2 = new JsonArrayRequest(Server.ư,
-//                new Response.Listener<JSONArray>() {
-//                    @Override
-//                    public void onResponse(JSONArray response) {
-//                        if (response != null) {
-//                            for (int i = 0; i < response.length(); i++) {
-//                                try {
-//                                    JSONObject jsonObject = response.getJSONObject(i);
-//                                    db_id = jsonObject.getInt("id");
-//                                    db_hoten = jsonObject.getString("hoten");
-//                                    db_email = jsonObject.getString("email");
-//                                    db_sdt = jsonObject.getString("sodienthoai");
-//                                    if (db_id == MainActivity.idtaikhoan) {
-//                                        hoten = db_hoten;
-//                                        sdt = db_sdt;
-//                                        email = db_email;
-//                                        break;
-//                                    }
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                            }
-//                        }
-//                    }
-//                },
-//                new Response.ErrorListener() {
-//                    @Override
-//                    public void onErrorResponse(VolleyError error) {
-//                        CheckConnection.ShowToast_Short(getApplicationContext(), error.toString());
-//                    }
-//                });
-//        requestQueue2.add(jsonArrayRequest2);
-//    }
+    private void GetDataTaiKhoan() {
+        RequestQueue requestQueue2 = Volley.newRequestQueue(getApplicationContext());
+        JsonArrayRequest jsonArrayRequest2 = new JsonArrayRequest(Server.duongdan_taikhoan,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        if (response != null) {
+                            for (int i = 0; i < response.length(); i++) {
+                                try {
+                                    JSONObject jsonObject = response.getJSONObject(i);
+                                    db_id = jsonObject.getInt("id");
+                                    db_hoten = jsonObject.getString("hoten");
+                                    db_email = jsonObject.getString("email");
+                                    db_sdt = jsonObject.getString("sodienthoai");
+                                    if (db_id == MainActivity.idtaikhoan) {
+                                        hoten = db_hoten;
+                                        sdt = db_sdt;
+                                        email = db_email;
+                                        break;
+                                    }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        CheckConnection.ShowToast_Short(getApplicationContext(), error.toString());
+                    }
+                });
+        requestQueue2.add(jsonArrayRequest2);
+    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -126,142 +126,142 @@ public class GioHangActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                //intent.putExtra("idtaikhoan", MainActivity.idtaikhoan);
+                intent.putExtra("idtaikhoan", MainActivity.idtaikhoan);
                 startActivity(intent);
             }
         });
 
-//        btthanhtoan.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                boolean isEnterenoughinformation = true;
-//                if (MainActivity.arr_giohang.size() > 0) {
-//                    for (int i = 0; i < MainActivity.arr_giohang.size(); i++) {
-//                        if (MainActivity.arr_giohang.get(i).getNgaynhanphong() == null || MainActivity.arr_giohang.get(i).getNgaytraphong() == null) {
-//                            CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn chưa chọn ngày cho tất cả các phòng");
-//                            isEnterenoughinformation = false;
-//                        }
-//                    }
-//                    if (isEnterenoughinformation) {
-//                        View view = LayoutInflater.from(GioHangActivity.this).inflate(R.layout.custom_dialog_thanh_toan, null);
-//                        AlertDialog.Builder builder = new AlertDialog.Builder(GioHangActivity.this);
-//                        builder.setView(view);
-//                        builder.setCancelable(false);
-//                        final AlertDialog alertDialog = builder.create();
-//
-//                        Button btnDongY = (Button) view.findViewById(R.id.btn_dong_y_thay_doi_thong_tin);
-//                        Button btnKhongDongY = (Button) view.findViewById(R.id.btn_khong_thay_doi_thong_tin);
-//                        Button btnTroVe = (Button) view.findViewById(R.id.btn_tro_ve);
-//
-//                        btnTroVe.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                alertDialog.cancel();
-//                            }
-//                        });
-//
-//                        btnKhongDongY.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                EvenBtnYesDialog();
-//                            }
-//                        });
-//
-//                        btnDongY.setOnClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                Intent intent = new Intent(getApplicationContext(), ThongTinKhachHangActivity.class);
-//                                startActivity(intent);
-//                                alertDialog.cancel();
-//                            }
-//                        });
-//
-//                        alertDialog.show();
-//                    }
-//                } else {
-//                    CheckConnection.ShowToast_Short(getApplicationContext(), "Giỏ hàng của bạn chưa có sản phẩm để thanh toán");
-//                }
-//            }
-//        });
+        btthanhtoan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean isEnterenoughinformation = true;
+                if (MainActivity.arr_giohang.size() > 0) {
+                    for (int i = 0; i < MainActivity.arr_giohang.size(); i++) {
+                        if (MainActivity.arr_giohang.get(i).getNgaynhanphong() == null || MainActivity.arr_giohang.get(i).getNgaytraphong() == null) {
+                            CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn chưa chọn ngày cho tất cả các phòng");
+                            isEnterenoughinformation = false;
+                        }
+                    }
+                    if (isEnterenoughinformation) {
+                        View view = LayoutInflater.from(GioHangActivity.this).inflate(R.layout.custom_dialog_thanh_toan, null);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(GioHangActivity.this);
+                        builder.setView(view);
+                        builder.setCancelable(false);
+                        final AlertDialog alertDialog = builder.create();
+
+                        Button btnDongY = (Button) view.findViewById(R.id.btn_dong_y_thay_doi_thong_tin);
+                        Button btnKhongDongY = (Button) view.findViewById(R.id.btn_khong_thay_doi_thong_tin);
+                        Button btnTroVe = (Button) view.findViewById(R.id.btn_tro_ve);
+
+                        btnTroVe.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                alertDialog.cancel();
+                            }
+                        });
+
+                        btnKhongDongY.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                EvenBtnYesDialog();
+                            }
+                        });
+
+                        btnDongY.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                Intent intent = new Intent(getApplicationContext(), ThongTinKhachHang.class);
+                                startActivity(intent);
+                                alertDialog.cancel();
+                            }
+                        });
+
+                        alertDialog.show();
+                    }
+                } else {
+                    CheckConnection.ShowToast_Short(getApplicationContext(), "Giỏ hàng của bạn chưa có sản phẩm để thanh toán");
+                }
+            }
+        });
     }
 
-//    private void EvenBtnYesDialog() {
-//        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-//        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.duongdan_donhang, new Response.Listener<String>() {
-//            @Override
-//            public void onResponse(final String madonhang) {
-//                Log.d("madonhang", madonhang);
-//                if (Integer.parseInt((madonhang)) > 0) {
-//                    RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-//                    StringRequest request = new StringRequest(Request.Method.POST, Server.duongdan_chitietdonhang, new Response.Listener<String>() {
-//                        @Override
-//                        public void onResponse(String response) {
-//                            if (response.equals("1")) {
-//                                MainActivity.arr_giohang.clear();
-//                                CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn đã đặt phòng khách sạn thành công");
-//                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//                                //intent.putExtra("idtaikhoan", MainActivity.idtaikhoan);
-//                                startActivity(intent);
-//                                CheckConnection.ShowToast_Short(getApplicationContext(), "Mời bạn tiếp tục chọn khách sạn");
-//                            } else {
-//                                CheckConnection.ShowToast_Short(getApplicationContext(), "Dữ liệu giỏ hàng của bạn bị lỗi");
-//                            }
-//                        }
-//                    }, new Response.ErrorListener() {
-//                        @Override
-//                        public void onErrorResponse(VolleyError error) {
-//
-//                        }
-//                    }) {
-//                        @Override
-//                        protected Map<String, String> getParams() throws AuthFailureError {
-//                            JSONArray jsonArray = new JSONArray();
-//                            for (int i = 0; i < MainActivity.arr_giohang.size(); i++) {
-//                                JSONObject jsonObject = new JSONObject();
-//                                try {
-//                                    jsonObject.put("madonhang", madonhang);
-//                                    jsonObject.put("idkhachsan", MainActivity.arr_giohang.get(i).getIdkhachsan());
-//                                    jsonObject.put("tenkhachsan", MainActivity.arr_giohang.get(i).getTenkhachsan());
-//                                    jsonObject.put("maphong", MainActivity.arr_giohang.get(i).getIdphong());
-//                                    jsonObject.put("tenphong", MainActivity.arr_giohang.get(i).getTenloaiphong());
-//                                    jsonObject.put("giaphong", MainActivity.arr_giohang.get(i).getGiaphong() / MainActivity.arr_giohang.get(i).getSoluong());
-//                                    jsonObject.put("soluongphong", MainActivity.arr_giohang.get(i).getSoluong());
-//                                    jsonObject.put("sodem", MainActivity.arr_giohang.get(i).getSodem());
-//                                    jsonObject.put("ngaynhanphong", MainActivity.arr_giohang.get(i).getNgaynhanphong());
-//                                    jsonObject.put("ngaytraphong", MainActivity.arr_giohang.get(i).getNgaytraphong());
-//                                    jsonObject.put("dichvu", MainActivity.arr_giohang.get(i).getDichvu());
-//                                    jsonObject.put("trangthai", 0);
-//                                } catch (JSONException e) {
-//                                    e.printStackTrace();
-//                                }
-//                                jsonArray.put(jsonObject);
-//                            }
-//                            HashMap<String, String> hashMap = new HashMap<String, String>();
-//                            hashMap.put("json", jsonArray.toString());
-//                            return hashMap;
-//                        }
-//                    };
-//                    queue.add(request);
-//                }
-//            }
-//        }, new Response.ErrorListener() {
-//            @Override
-//            public void onErrorResponse(VolleyError error) {
-//
-//            }
-//        }) {
-//            @Override
-//            protected Map<String, String> getParams() throws AuthFailureError {
-//                HashMap<String, String> hashMap = new HashMap<String, String>();
-//                hashMap.put("tenkhachhang", hoten);
-//                hashMap.put("sodienthoai", sdt);
-//                hashMap.put("email", email);
-//                //hashMap.put("idtaikhoan", Integer.toString(MainActivity.idtaikhoan));
-//                return hashMap;
-//            }
-//        };
-//        requestQueue.add(stringRequest);
-//    }
+    private void EvenBtnYesDialog() {
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.duongdan_donhang, new Response.Listener<String>() {
+            @Override
+            public void onResponse(final String madonhang) {
+                Log.d("madonhang", madonhang);
+                if (Integer.parseInt((madonhang)) > 0) {
+                    RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                    StringRequest request = new StringRequest(Request.Method.POST, Server.duongdan_chitietdonhang, new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if (response.equals("1")) {
+                                MainActivity.arr_giohang.clear();
+                                CheckConnection.ShowToast_Short(getApplicationContext(), "Bạn đã đặt phòng khách sạn thành công");
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                intent.putExtra("idtaikhoan", MainActivity.idtaikhoan);
+                                startActivity(intent);
+                                CheckConnection.ShowToast_Short(getApplicationContext(), "Mời bạn tiếp tục chọn khách sạn");
+                            } else {
+                                CheckConnection.ShowToast_Short(getApplicationContext(), "Dữ liệu giỏ hàng của bạn bị lỗi");
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    }) {
+                        @Override
+                        protected Map<String, String> getParams() throws AuthFailureError {
+                            JSONArray jsonArray = new JSONArray();
+                            for (int i = 0; i < MainActivity.arr_giohang.size(); i++) {
+                                JSONObject jsonObject = new JSONObject();
+                                try {
+                                    jsonObject.put("madonhang", madonhang);
+                                    jsonObject.put("idkhachsan", MainActivity.arr_giohang.get(i).getIdkhachsan());
+                                    jsonObject.put("tenkhachsan", MainActivity.arr_giohang.get(i).getTenkhachsan());
+                                    jsonObject.put("maphong", MainActivity.arr_giohang.get(i).getIdphong());
+                                    jsonObject.put("tenphong", MainActivity.arr_giohang.get(i).getTenloaiphong());
+                                    jsonObject.put("giaphong", MainActivity.arr_giohang.get(i).getGiaphong() / MainActivity.arr_giohang.get(i).getSoluong());
+                                    jsonObject.put("soluongphong", MainActivity.arr_giohang.get(i).getSoluong());
+                                    jsonObject.put("sodem", MainActivity.arr_giohang.get(i).getSodem());
+                                    jsonObject.put("ngaynhanphong", MainActivity.arr_giohang.get(i).getNgaynhanphong());
+                                    jsonObject.put("ngaytraphong", MainActivity.arr_giohang.get(i).getNgaytraphong());
+                                    jsonObject.put("dichvu", MainActivity.arr_giohang.get(i).getDichvu());
+                                    jsonObject.put("trangthai", 0);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                                jsonArray.put(jsonObject);
+                            }
+                            HashMap<String, String> hashMap = new HashMap<String, String>();
+                            hashMap.put("json", jsonArray.toString());
+                            return hashMap;
+                        }
+                    };
+                    queue.add(request);
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> hashMap = new HashMap<String, String>();
+                hashMap.put("tenkhachhang", hoten);
+                hashMap.put("sodienthoai", sdt);
+                hashMap.put("email", email);
+                hashMap.put("idtaikhoan", Integer.toString(MainActivity.idtaikhoan));
+                return hashMap;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
 
     private void CactchOnItemListView() {
         lvgiohang.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -276,9 +276,9 @@ public class GioHangActivity extends AppCompatActivity {
                         if (MainActivity.arr_giohang.size() <= 0) {
                             tvthongbao.setVisibility(View.VISIBLE);
                         } else {
-                            Date d_tra = formatter.parse(MainActivity.arr_giohang.get(position).getNgaytraphong(),new ParsePosition(0));
-                            Date d_nhan = formatter.parse(MainActivity.arr_giohang.get(position).getNgaynhanphong(),new ParsePosition(0));
-                            CalendarActivity.XoaNgay(d_nhan, d_tra);
+                            //Date d_tra = formatter.parse(MainActivity.arr_giohang.get(position).getNgaytraphong(),new ParsePosition(0));
+                            //Date d_nhan = formatter.parse(MainActivity.arr_giohang.get(position).getNgaynhanphong(),new ParsePosition(0));
+                            //CalendarActivity.XoaNgay(d_nhan, d_tra);
                             MainActivity.arr_giohang.remove(position);
                             giohang_adapter.notifyDataSetChanged();
                             EvenUltil();

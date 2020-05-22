@@ -189,7 +189,7 @@ import javax.crypto.KeyAgreement;
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+    public boolean onOptionsItemSelected( MenuItem item) {
         switch (item.getItemId()) {
             case R.id.menucart:
                 Intent intent = new Intent(getApplicationContext(), GioHangActivity.class);
