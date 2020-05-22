@@ -1,4 +1,4 @@
-package com.example.hotelbooking.ultil;
+package com.example.hotelbooking.model;
 
 public class Giohang {
     public int idphong;

@@ -12,4 +12,9 @@ public class Server {
     public static String duongdan_taikhoan = "http://" + localhost + "/server/gettaikhoan.php";
     public static String duongdan_donhang = "http://" + localhost + "/server/thongtinkhachhang.php";
     public static String duongdan_chitietdonhang = "http://" + localhost + "/server/chitietdonhang.php";
+
+    public static String duongdan_khachsandadat = "http://" + localhost + "/server/getkhachsandadat.php";
+    public static String duongdan_huydonhang = "http://" + localhost + "/server/huydonhang.php";
+    public static String duongdan_chitietlichsu = "http://" + localhost + "/server/getchitietlichsu.php";
+    public static String duongdan_lichsudatphong = "http://" + localhost + "/server/getlichsudatphong.php";
 }

@@ -16,7 +16,7 @@ import com.example.hotelbooking.R;
 import com.example.hotelbooking.activity.CalendarActivity;
 import com.example.hotelbooking.activity.GioHangActivity;
 import com.example.hotelbooking.activity.MainActivity;
-import com.example.hotelbooking.ultil.Giohang;
+import com.example.hotelbooking.model.Giohang;
 import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;

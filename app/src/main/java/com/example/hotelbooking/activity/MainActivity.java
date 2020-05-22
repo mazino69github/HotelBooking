@@ -1,10 +1,6 @@
 package com.example.hotelbooking.activity;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.SearchView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,11 +8,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.app.AlertDialog;
 
-import android.Manifest;
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,14 +18,12 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.appcompat.widget.Toolbar;
 
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import com.android.volley.AuthFailureError;
@@ -41,16 +32,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.hotelbooking.R;
 import com.example.hotelbooking.adapter.KhachSanAdapter;
 import com.example.hotelbooking.adapter.LoaiksAdapter;
+import com.example.hotelbooking.adapter.khachsandadatAdapter;
 import com.example.hotelbooking.model.KhachSan;
 import com.example.hotelbooking.model.Loaiks;
 import com.example.hotelbooking.ultil.CheckConnection;
-import com.example.hotelbooking.ultil.Giohang;
+import com.example.hotelbooking.model.Giohang;
 import com.example.hotelbooking.ultil.Server;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
@@ -81,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
     ArrayList<KhachSan> mangkhachsan;
     KhachSanAdapter khachSanAdapter;
     public static ArrayList<KhachSan> mangkhachsandadat;
-    //khachsandadatAdapter khachsandadat_adapter;
+    khachsandadatAdapter khachsandadat_adapter;
 
     LoaiksAdapter diadiemadapter;
     ArrayList<Loaiks> arr_diadiem;
@@ -104,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
             ActionViewFlipper();
             GetDuLieuDiaDiem();
             GetDuLieuKsMoiNhat();
-            //GetDuLieuKhachSanDaDat();
+            GetDuLieuKhachSanDaDat();
             CatchOnItemListView();
         } else {
             CheckConnection.ShowToast_Short(getApplicationContext(), "Kết nối không thành công. Kiểm tra lại!!!");
@@ -278,31 +269,31 @@ public class MainActivity extends AppCompatActivity {
         requestQueue.add(jsonArrayRequest);
     }
 
-    /*private void GetDuLieuKhachSanDaDat() {
+    private void GetDuLieuKhachSanDaDat() {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         StringRequest stringRequest = new StringRequest(Request.Method.POST, Server.duongdan_khachsandadat, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 if (response != null) {
                     int ID = 0;
-                    String Tensp = "";
-                    Integer Gia = 0;
-                    String Hinhanhsp = "";
+                    String Tenks = "";
+                    Integer Giaks = 0;
+                    String Hinhanhks = "";
                     String Mota = "";
-                    int IDsp = 0;
+                    int IDks = 0;
                     String Diachi = "";
                     try {
                         JSONArray jsonArray = new JSONArray(response);
                         for (int i = 0; i < jsonArray.length(); i++) {
                             JSONObject jsonObject = jsonArray.getJSONObject(i);
                             ID = jsonObject.getInt("id");
-                            Tensp = jsonObject.getString("tensp");
-                            Gia = jsonObject.getInt("giasp");
-                            Hinhanhsp = jsonObject.getString("hinhanhsp");
+                            Tenks = jsonObject.getString("tenks");
+                            Giaks = jsonObject.getInt("giaks");
+                            Hinhanhks = jsonObject.getString("hinhanhks");
                             Mota = jsonObject.getString("mota");
-                            IDsp = jsonObject.getInt("idsp");
+                            IDks = jsonObject.getInt("idks");
                             Diachi = jsonObject.getString("diachi");
-                            manhkhachsandadat.add(new KhachSan(ID, Tensp, Gia, Hinhanhsp, Mota, IDsp, Diachi));
+                            mangkhachsandadat.add(new KhachSan(ID, Tenks, Giaks, Hinhanhks, Mota, IDks, Diachi));
                             khachsandadat_adapter.notifyDataSetChanged();
                         }
                     } catch (JSONException e) {
@@ -324,7 +315,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         requestQueue.add(stringRequest);
-    }*/
+    }
 
     private void GetDuLieuDiaDiem() {
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
@@ -406,12 +397,24 @@ public class MainActivity extends AppCompatActivity {
 
         mangkhachsan = new ArrayList<>();
         khachSanAdapter = new KhachSanAdapter(getApplicationContext(), mangkhachsan);
-        recyclerViewmanhinhchinh.setHasFixedSize(true);
-        recyclerViewmanhinhchinh.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
-        recyclerViewmanhinhchinh.setAdapter(khachSanAdapter);
+//        recyclerViewmanhinhchinh.setHasFixedSize(true);
+//        recyclerViewmanhinhchinh.setLayoutManager(new GridLayoutManager(getApplicationContext(), 2));
+//        recyclerViewmanhinhchinh.setAdapter(khachSanAdapter);
 
-        //mangkhachsandadat = new ArrayList<>();
-        //khachsandadatAdapter = new khachsandadatAdapter(getApplicationContext(), mangkhachsandadat);
+        mangkhachsandadat = new ArrayList<>();
+        khachsandadat_adapter = new khachsandadatAdapter(getApplicationContext(), mangkhachsandadat);
+
+        LinearLayoutManager layoutManager1
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager layoutManager2
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+
+        recyclerViewmanhinhchinh.setLayoutManager(layoutManager1);
+        recyclerViewmanhinhchinh.setHasFixedSize(true);
+        recyclerViewmanhinhchinh.setAdapter(khachSanAdapter);
+        recyclerViewkhachsandadat.setLayoutManager(layoutManager2);
+        recyclerViewkhachsandadat.setHasFixedSize(true);
+        recyclerViewkhachsandadat.setAdapter(khachsandadat_adapter);
 
         arr_diadiem = new ArrayList<>();
         diadiemadapter = new LoaiksAdapter(arr_diadiem, getApplicationContext());
